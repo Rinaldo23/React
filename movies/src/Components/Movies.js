@@ -48,8 +48,8 @@ function Movies() {
                         <div className='md:font-bold text-sm md:text-2xl flex justify-center mb-4 flex-wrap '>
                             {
                                 movies.map((movie) => (
-                                    <div className={`border-gray-900 border-2 rounded-xl m-4 bg-[url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})] h-[20vh] w-[40vw] md:h-[60vh] md:w-[20vw] bg-center bg-cover flex items-end md:hover:scale-105 transition delay-10 duration-500 ease-in-out scroll-smooth`}>
-                                        < div className={`bg-gray-900 bg-opacity-50 h-[5vh] md:h-[10vh] w-full rounded-lg text-white flex justify-center items-center text-center`}>{movie.title}</div>
+                                    <div className={`border-gray-900 border-2 rounded-xl m-4 bg-[url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})] h-[20vh] w-[40vw] md:h-[25vh] md:w-[25vw] lg:h-[60vh] lg:w-[20vw] bg-center bg-cover flex items-end md:hover:scale-105 transition delay-10 duration-500 ease-in-out scroll-smooth`}>
+                                        < div className={`bg-gray-900 bg-opacity-50 h-[5vh] md:h-[7vh] lg:h-[10vh] w-full rounded-lg text-white flex justify-center items-center text-center`}>{movie.title}</div>
                                     </div>
                                 ))
                             }
