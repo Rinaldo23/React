@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Spiderman from '../Spiderman.jpg'
 import axios from 'axios'
 import { Oval } from 'react-loader-spinner'
 
@@ -9,18 +8,17 @@ function Movies() {
 
     useEffect(() => {
         axios.get("https://api.themoviedb.org/3/trending/movie/week?api_key=2905f9ab72e771d70a52c00ee3bbfaa9&page=1").then((res) => {
-            console.table(res.data.results)
             setMovies(res.data.results)
         })
     }, [])
 
     return (
         <div>
-            <div className='font-bold text-2xl flex justify-center mt-6 mb-2 p-1'>Trending Movies</div>
+            <div className='text-white font-bold text-3xl flex justify-center mt-6 mb-2 p-1'>Trending Movies</div>
 
             {
                 movies.length == 0 ?
-                    <div> <Oval
+                    <div className='flex justify-center'> <Oval
                         height="80"
                         width="80"
                         radius="9"
