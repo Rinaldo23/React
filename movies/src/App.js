@@ -2,7 +2,6 @@ import './App.css';
 import NavBar from './Components/NavBar';
 import Banner from './Components/Banner';
 import Movies from './Components/Movies';
-import Pagination from './Components/Pagination';
 import Favourites from './Components/Favourites';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
@@ -11,11 +10,10 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path='/' element={
+        <Route path='/movies' element={
           <>
             <Banner />
             <Movies />
-            <Pagination />
           </>
         } />
 
