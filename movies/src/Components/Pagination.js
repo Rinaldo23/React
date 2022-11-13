@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Pagination({pageNumber, previousPage, nextPage}) {
+function Pagination({ pageNumber, previousPage, nextPage }) {
 
   return (
     <div className='flex justify-center mt-2 md:mt-8 text-sm md:text-xl'>
