@@ -25,13 +25,13 @@ function Movies() {
     let addMovie = (movie) => {
         let newArr = [...favourites, movie]
         setFavourites([...newArr])
-        localStorage.setItem("imdb",JSON.stringify(newArr))
+        localStorage.setItem("imdb", JSON.stringify(newArr))
     }
 
-    let removeMovie =(movie) => {
+    let removeMovie = (movie) => {
         let newArr = favourites.filter((m) => m.id != movie.id)
         setFavourites([...newArr])
-        localStorage.setItem("imdb",JSON.stringify(newArr))
+        localStorage.setItem("imdb", JSON.stringify(newArr))
     }
 
     useEffect(() => {

@@ -1,10 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from '../Spiderman.jpg'
 import Pagination from './Pagination'
 
 function Favourites() {
 
   const [currGenre, setCurrGenre] = useState("All Genre")
+  const [favourites, setFavourites] = useState([])
+
+  let removeMovie = (movie) => {
+    let newArr = favourites.filter((m) => {
+      return m.id != movie.id
+    })
+    setFavourites([...newArr])
+    localStorage.setItem("imdb",JSON.stringify(newArr))
+  }
+
+  useEffect(() => {
+    let oldFav = localStorage.getItem("imdb")
+    oldFav = JSON.parse(oldFav)
+    setFavourites([...oldFav])
+  }, [])
 
   return (
     <div className='bg-white'>
@@ -38,40 +53,53 @@ function Favourites() {
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full text-center">
-                  <thead class="border-b">
+                  <thead class="bg-gray-50 min-w-full">
                     <tr>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                      <th scope="col" class="text-sm font-medium w-[40vw] px-6 py-4">
                         Name
                       </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                      <th scope="col" class="text-sm font-medium px-6 py-4">
                         Rating
                       </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                      <th scope="col" class="text-sm font-medium px-6 py-4">
                         Popularity
                       </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                      <th scope="col" class="text-sm font-medium px-6 py-4">
                         Genre
                       </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                      <th scope="col" class="text-sm font-medium px-6 py-4">
                         Remove
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="border-b">
-                      <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                        <div className='flex flex-wrap items-center'>
-                          <img src={Image} className='h-[12vh] w-[10vw] mr-5 rounded-lg bg-center bg-cover ' />
-                          <div>SpiderMan - No Way Home</div>
-                        </div>
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Cell
-                      </td>
-                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Cell
-                      </td>
-                    </tr>
+                  <tbody className='bg-white divide-y divide-gray-200'>
+                    {
+                      favourites.map((movie) => (
+                        <tr key={movie.id}>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
+                            <div className='flex items-center'>
+                              <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title}
+                                className='border-gray-900 border-2 rounded-xl mr-6 h-[20vh] w-[40vw] md:h-[25vh] md:w-[25vw] lg:h-[15vh] lg:w-[12vw] bg-center bg-cover' />
+                              <div className='font-medium text-base'>{movie.title}</div>
+                            </div>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
+                            <div>{movie.vote_average}</div>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
+                            <div>{movie.popularity}</div>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
+                            <div>{movie.genre_ids[0]}</div>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
+                            <button onClick={() => removeMovie(movie)} className='text-red-600 hover:text-red-900'>
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    }
                   </tbody>
                 </table>
               </div>
@@ -81,7 +109,7 @@ function Favourites() {
 
       </div>
 
-      <Pagination/>
+      <Pagination />
 
     </div>
   )
