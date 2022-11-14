@@ -61,7 +61,7 @@ function Favourites() {
                     <tr class="border-b">
                       <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                         <div className='flex flex-wrap items-center'>
-                          <img src={Image} className='h-[10vh] w-[15vw] mr-5 rounded-lg bg-center bg-cover ' />
+                          <img src={Image} className='h-[12vh] w-[10vw] mr-5 rounded-lg bg-center bg-cover ' />
                           <div>SpiderMan - No Way Home</div>
                         </div>
                       </td>
