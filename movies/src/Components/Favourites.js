@@ -4,15 +4,22 @@ import Pagination from './Pagination'
 
 function Favourites() {
 
+  let genreids = {
+    28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy', 80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+    14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music', 9648: 'Mystery', 10749: 'Romance', 878: 'Sci-Fi', 10770: 'TV',
+    53: 'Thriller', 10752: 'War', 37: 'Western'
+  };
+
   const [currGenre, setCurrGenre] = useState("All Genre")
   const [favourites, setFavourites] = useState([])
+  const [genres, setGenre] = useState([])
 
   let removeMovie = (movie) => {
     let newArr = favourites.filter((m) => {
       return m.id != movie.id
     })
     setFavourites([...newArr])
-    localStorage.setItem("imdb",JSON.stringify(newArr))
+    localStorage.setItem("imdb", JSON.stringify(newArr))
   }
 
   useEffect(() => {
@@ -21,25 +28,26 @@ function Favourites() {
     setFavourites([...oldFav])
   }, [])
 
+  useEffect(() => {
+    let temp = favourites.map((movie) => genreids[movie.genre_ids[0]])
+    // console.log(temp)
+    setGenre(["All Genre",...temp])
+  },[favourites])
+
   return (
     <div className='bg-white'>
       <div className='flex justify-center felx-wrap text-white p-2'>
-        <button className={
-          currGenre == "All Genre" ?
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-cyan-700' :
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-blue-400 hover:bg-cyan-700'
-        }>All Genre</button>
-        <div className={
-          false ?
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-cyan-700' :
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-blue-400 hover:bg-cyan-700'
-        }>Action</div>
-        <div className={
-          false ?
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-cyan-700' :
-            'border m-2 p-1 px-2 rounded-lg font-bold bg-blue-400 hover:bg-cyan-700'
-        }>Drama</div>
-
+        {
+          genres.map((genre) => (
+            <button className={
+              currGenre == genre ?
+                'border m-2 p-1 px-2 rounded-lg font-bold bg-cyan-700' :
+                'border m-2 p-1 px-2 rounded-lg font-bold bg-blue-400 hover:bg-cyan-700'
+            }
+            onClick={() => setCurrGenre(genre)}
+            >{genre}</button>
+          ))
+        }
       </div>
 
       <div className='text-center'>
@@ -90,7 +98,7 @@ function Favourites() {
                             <div>{movie.popularity}</div>
                           </td>
                           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
-                            <div>{movie.genre_ids[0]}</div>
+                            <div>{genreids[movie.genre_ids[0]]}</div>
                           </td>
                           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
                             <button onClick={() => removeMovie(movie)} className='text-red-600 hover:text-red-900'>
@@ -106,7 +114,6 @@ function Favourites() {
             </div>
           </div>
         </div>
-
       </div>
 
       <Pagination />
