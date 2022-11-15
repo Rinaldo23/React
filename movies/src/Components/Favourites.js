@@ -14,17 +14,28 @@ function Favourites() {
   const [favourites, setFavourites] = useState([])
   const [genres, setGenre] = useState([])
   const [rating, setRating] = useState(0)
+  const [popularity,setPopularity] = useState(0)
 
   let filteredMovies = []
   filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
 
-  if(rating == 1){
-    filteredMovies = filteredMovies.sort((a,b) => {
+  if (rating == 1) {
+    filteredMovies = filteredMovies.sort((a, b) => {
       return a.vote_average - b.vote_average
     })
-  }else if(rating == -1){
-    filteredMovies = filteredMovies.sort((a,b) => {
+  } else if (rating == -1) {
+    filteredMovies = filteredMovies.sort((a, b) => {
       return b.vote_average - a.vote_average
+    })
+  }
+
+  if (popularity == 1) {
+    filteredMovies = filteredMovies.sort((a, b) => {
+      return a.popularity - b.popularity
+    })
+  } else if (popularity == -1) {
+    filteredMovies = filteredMovies.sort((a, b) => {
+      return b.popularity - a.popularity
     })
   }
 
@@ -83,16 +94,28 @@ function Favourites() {
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
                         <div className=' flex justify-center items-center'>
-                          <img onClick={()=> setRating(-1)} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
+                          <img onClick={() => {
+                            setPopularity(0)
+                            setRating(-1)
+                          }} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
                           Rating
-                          <img onClick={()=> setRating(1)} className='h-[3vh] ml-2 ' src={DownArrow} />
+                          <img onClick={() => {
+                            setPopularity(0)
+                            setRating(1)
+                          }} className='h-[3vh] ml-2 ' src={DownArrow} />
                         </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
                         <div className=' flex justify-center items-center'>
-                          <img className='h-[3vh] mr-2' src={DownArrow} />
+                          <img onClick={() => {
+                            setRating(0)
+                            setPopularity(-1)
+                            }} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
                           Popularity
-                          <img className='h-[3vh] ml-2 rotate-180' src={DownArrow} />
+                          <img onClick={() => {
+                            setRating(0)
+                            setPopularity(1)
+                            }} className='h-[3vh] ml-2 ' src={DownArrow} />
                         </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
