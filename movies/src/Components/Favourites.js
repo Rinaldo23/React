@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Image from '../Spiderman.jpg'
+import DownArrow from '../down-arrow.png'
 import Pagination from './Pagination'
 
 function Favourites() {
@@ -13,10 +13,20 @@ function Favourites() {
   const [currGenre, setCurrGenre] = useState("All Genre")
   const [favourites, setFavourites] = useState([])
   const [genres, setGenre] = useState([])
+  const [rating, setRating] = useState(0)
 
   let filteredMovies = []
-
   filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
+
+  if(rating == 1){
+    filteredMovies = filteredMovies.sort((a,b) => {
+      return a.vote_average - b.vote_average
+    })
+  }else if(rating == -1){
+    filteredMovies = filteredMovies.sort((a,b) => {
+      return b.vote_average - a.vote_average
+    })
+  }
 
   let removeMovie = (movie) => {
     let newArr = favourites.filter((m) => {
@@ -36,8 +46,8 @@ function Favourites() {
     let temp = favourites.map((movie) => genreids[movie.genre_ids[0]])
     // console.log(temp)
     temp = new Set(temp)
-    setGenre(["All Genre",...temp])
-  },[favourites])
+    setGenre(["All Genre", ...temp])
+  }, [favourites])
 
   return (
     <div className='bg-white'>
@@ -49,7 +59,7 @@ function Favourites() {
                 'border m-2 p-1 px-2 rounded-lg font-bold bg-cyan-700' :
                 'border m-2 p-1 px-2 rounded-lg font-bold bg-blue-400 hover:bg-cyan-700'
             }
-            onClick={() => setCurrGenre(genre)}
+              onClick={() => setCurrGenre(genre)}
             >{genre}</button>
           ))
         }
@@ -72,10 +82,18 @@ function Favourites() {
                         Name
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
-                        Rating
+                        <div className=' flex justify-center items-center'>
+                          <img onClick={()=> setRating(-1)} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
+                          Rating
+                          <img onClick={()=> setRating(1)} className='h-[3vh] ml-2 ' src={DownArrow} />
+                        </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
-                        Popularity
+                        <div className=' flex justify-center items-center'>
+                          <img className='h-[3vh] mr-2' src={DownArrow} />
+                          Popularity
+                          <img className='h-[3vh] ml-2 rotate-180' src={DownArrow} />
+                        </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
                         Genre
