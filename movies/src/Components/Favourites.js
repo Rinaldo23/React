@@ -17,7 +17,7 @@ function Favourites() {
   const [popularity, setPopularity] = useState(0)
   const [search, setSearch] = useState('')
   const [pageNumber, setPageNumber] = useState(1)
-  const [rows, setRows] = useState(5)
+  const [rows, setRows] = useState(4)
 
   let filteredMovies = []
   filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
@@ -50,7 +50,7 @@ function Favourites() {
   let si = (pageNumber - 1) * rows
   let ei = Number(si) + Number(rows)
 
-  filteredMovies = filteredMovies.slice(si,ei)
+  filteredMovies = filteredMovies.slice(si, ei)
 
   let previousPage = () => {
     if (pageNumber > 1) {
@@ -59,7 +59,7 @@ function Favourites() {
   }
 
   let nextPage = () => {
-    if(pageNumber < maxPage){
+    if (pageNumber < maxPage) {
       setPageNumber(pageNumber + 1)
     }
   }
@@ -87,7 +87,7 @@ function Favourites() {
 
   return (
     <div className='bg-gray-900'>
-      <div className='flex justify-center felx-wrap text-white p-2'>
+      <div className='flex justify-center flex-wrap text-white p-2'>
         {
           genres.map((genre) => (
             <button className={
@@ -102,8 +102,10 @@ function Favourites() {
       </div>
 
       <div className='text-center'>
-        <input type="text" placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)} className='w-[25vw] border border-black m-2 rounded-md text-center ' />
-        <input type="number" placeholder='Rows' value={rows} onChange={(e) => setRows(e.target.value)} className='w-[10vw] border border-black m-2 rounded-md text-center' />
+        <input type="text" placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}
+          className='w-[50vw] md:w-[30vw] lg:w-[25vw] border border-black m-2 rounded-md text-center ' />
+        <input type="number" placeholder='Rows' value={rows} onChange={(e) => setRows(e.target.value)}
+          className='w-[25vw] md:w-[25vw] lg:w-[10vw] border border-black m-2 rounded-md text-center' />
       </div>
 
       <div>
@@ -111,7 +113,7 @@ function Favourites() {
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div class="overflow-hidden">
-                <table class="min-w-full text-center">
+                <table class="min-w-full text-center ">
                   <thead class="bg-gray-600 text-white min-w-full">
                     <tr>
                       <th scope="col" class="text-sm font-medium w-[40vw] px-6 py-4">
@@ -151,14 +153,14 @@ function Favourites() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-black text-white divide-y divide-gray-200'>
+                  <tbody className='bg-black text-white divide-y divide-gray-200 '>
                     {
                       filteredMovies.map((movie) => (
                         <tr key={movie.id}>
                           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
                             <div className='flex items-center'>
                               <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title}
-                                className='border-gray-300 border-2 rounded-xl mr-6 h-[20vh] w-[40vw] md:h-[25vh] md:w-[25vw] lg:h-[15vh] lg:w-[12vw] bg-center bg-cover' />
+                                className='border-gray-300 border-2 rounded-full lg:rounded-xl mr-2 lg:mr-6 h-[3vh] w-[3vh] md:h-[5vh] md:w-[5vh] lg:h-[15vh] lg:w-[12vw] bg-center bg-cover' />
                               <div className='font-medium text-base'>{movie.title}</div>
                             </div>
                           </td>
@@ -187,7 +189,7 @@ function Favourites() {
         </div>
       </div>
 
-      <Pagination pageNumber={pageNumber} previousPage={previousPage} nextPage={nextPage}/>
+      <Pagination pageNumber={pageNumber} previousPage={previousPage} nextPage={nextPage} />
 
     </div>
   )

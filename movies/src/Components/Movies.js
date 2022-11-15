@@ -77,8 +77,8 @@ function Movies() {
                                             hover == movie.id && <>
                                                 {
                                                     !favourites.find((m) => m.id == movie.id) ?
-                                                        <div className='absolute top-2 right-2 bg-gray-800 p-2 rounded-xl text-2xl cursor-pointer ' onClick={() => addMovie(movie)}>➕</div> :
-                                                        <div className='absolute top-2 right-2 bg-gray-800 p-2 rounded-xl text-2xl cursor-pointer' onClick={() => removeMovie(movie)}>❌</div>
+                                                        <div className='absolute top-1 lg:top-2 right-1 lg:right-2 bg-gray-800 p-2 rounded-xl text-sm lg:text-2xl cursor-pointer ' onClick={() => addMovie(movie)}>➕</div> :
+                                                        <div className='absolute top-1 lg:top-2 right-1 lg:right-2 bg-gray-800 p-2 rounded-xl text-sm lg:text-2xl cursor-pointer ' onClick={() => removeMovie(movie)}>❌</div>
                                                 }
                                             </>
                                         }
