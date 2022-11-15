@@ -14,8 +14,10 @@ function Favourites() {
   const [favourites, setFavourites] = useState([])
   const [genres, setGenre] = useState([])
   const [rating, setRating] = useState(0)
-  const [popularity,setPopularity] = useState(0)
+  const [popularity, setPopularity] = useState(0)
   const [search, setSearch] = useState('')
+  const [pageNumber, setPageNumber] = useState(1)
+  const [rows, setRows] = useState(5)
 
   let filteredMovies = []
   filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
@@ -40,9 +42,27 @@ function Favourites() {
     })
   }
 
-  filteredMovies = filteredMovies.filter((movie) => 
+  filteredMovies = filteredMovies.filter((movie) =>
     movie.title.toLowerCase().includes(search.toLowerCase())
   )
+
+  let maxPage = Math.ceil(filteredMovies.length / rows)
+  let si = (pageNumber - 1) * rows
+  let ei = Number(si) + Number(rows)
+
+  filteredMovies = filteredMovies.slice(si,ei)
+
+  let previousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  }
+
+  let nextPage = () => {
+    if(pageNumber < maxPage){
+      setPageNumber(pageNumber + 1)
+    }
+  }
 
   let removeMovie = (movie) => {
     let newArr = favourites.filter((m) => {
@@ -66,7 +86,7 @@ function Favourites() {
   }, [favourites])
 
   return (
-    <div className='bg-white'>
+    <div className='bg-gray-900'>
       <div className='flex justify-center felx-wrap text-white p-2'>
         {
           genres.map((genre) => (
@@ -82,8 +102,8 @@ function Favourites() {
       </div>
 
       <div className='text-center'>
-        <input type="text" placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)} className='border border-black m-2 rounded-md text-center ' />
-        <input type="number" placeholder='Rows' className='border border-black m-2 rounded-md text-center' />
+        <input type="text" placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)} className='w-[25vw] border border-black m-2 rounded-md text-center ' />
+        <input type="number" placeholder='Rows' value={rows} onChange={(e) => setRows(e.target.value)} className='w-[10vw] border border-black m-2 rounded-md text-center' />
       </div>
 
       <div>
@@ -92,7 +112,7 @@ function Favourites() {
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full text-center">
-                  <thead class="bg-gray-50 min-w-full">
+                  <thead class="bg-gray-600 text-white min-w-full">
                     <tr>
                       <th scope="col" class="text-sm font-medium w-[40vw] px-6 py-4">
                         Name
@@ -102,7 +122,7 @@ function Favourites() {
                           <img onClick={() => {
                             setPopularity(0)
                             setRating(-1)
-                          }} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
+                          }} className='h-[3vh] mr-2 rotate-180 ' src={DownArrow} />
                           Rating
                           <img onClick={() => {
                             setPopularity(0)
@@ -115,12 +135,12 @@ function Favourites() {
                           <img onClick={() => {
                             setRating(0)
                             setPopularity(-1)
-                            }} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
+                          }} className='h-[3vh] mr-2 rotate-180' src={DownArrow} />
                           Popularity
                           <img onClick={() => {
                             setRating(0)
                             setPopularity(1)
-                            }} className='h-[3vh] ml-2 ' src={DownArrow} />
+                          }} className='h-[3vh] ml-2 ' src={DownArrow} />
                         </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">
@@ -131,14 +151,14 @@ function Favourites() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-white divide-y divide-gray-200'>
+                  <tbody className='bg-black text-white divide-y divide-gray-200'>
                     {
                       filteredMovies.map((movie) => (
                         <tr key={movie.id}>
                           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
                             <div className='flex items-center'>
                               <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title}
-                                className='border-gray-900 border-2 rounded-xl mr-6 h-[20vh] w-[40vw] md:h-[25vh] md:w-[25vw] lg:h-[15vh] lg:w-[12vw] bg-center bg-cover' />
+                                className='border-gray-300 border-2 rounded-xl mr-6 h-[20vh] w-[40vw] md:h-[25vh] md:w-[25vw] lg:h-[15vh] lg:w-[12vw] bg-center bg-cover' />
                               <div className='font-medium text-base'>{movie.title}</div>
                             </div>
                           </td>
@@ -167,7 +187,7 @@ function Favourites() {
         </div>
       </div>
 
-      <Pagination />
+      <Pagination pageNumber={pageNumber} previousPage={previousPage} nextPage={nextPage}/>
 
     </div>
   )
