@@ -129,7 +129,7 @@ function Favourites() {
                           <img onClick={() => {
                             setPopularity(0)
                             setRating(1)
-                          }} className='h-[3vh] ml-2 ' src={DownArrow} />
+                          }} className='h-[3vh] ml-2 mr-2' src={DownArrow} />
                         </div>
                       </th>
                       <th scope="col" class="text-sm font-medium px-6 py-4">

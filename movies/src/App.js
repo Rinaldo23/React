@@ -8,6 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      {/* <Movies /> */}
       <Routes>
         <Route path='/movies' element={<Movies />} />
         <Route path='/favourites' element={<Favourites />} />
