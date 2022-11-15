@@ -15,6 +15,7 @@ function Favourites() {
   const [genres, setGenre] = useState([])
   const [rating, setRating] = useState(0)
   const [popularity,setPopularity] = useState(0)
+  const [search, setSearch] = useState('')
 
   let filteredMovies = []
   filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
@@ -38,6 +39,10 @@ function Favourites() {
       return b.popularity - a.popularity
     })
   }
+
+  filteredMovies = filteredMovies.filter((movie) => 
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  )
 
   let removeMovie = (movie) => {
     let newArr = favourites.filter((m) => {
@@ -77,7 +82,7 @@ function Favourites() {
       </div>
 
       <div className='text-center'>
-        <input type="text" placeholder='Search' className='border border-black m-2 rounded-md text-center ' />
+        <input type="text" placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)} className='border border-black m-2 rounded-md text-center ' />
         <input type="number" placeholder='Rows' className='border border-black m-2 rounded-md text-center' />
       </div>
 
