@@ -14,6 +14,10 @@ function Favourites() {
   const [favourites, setFavourites] = useState([])
   const [genres, setGenre] = useState([])
 
+  let filteredMovies = []
+
+  filteredMovies = favourites.filter((movie) => currGenre == "All Genre" ? favourites : genreids[movie.genre_ids[0]] == currGenre)
+
   let removeMovie = (movie) => {
     let newArr = favourites.filter((m) => {
       return m.id != movie.id
@@ -24,13 +28,14 @@ function Favourites() {
 
   useEffect(() => {
     let oldFav = localStorage.getItem("imdb")
-    oldFav = JSON.parse(oldFav)
+    oldFav = JSON.parse(oldFav) || []
     setFavourites([...oldFav])
   }, [])
 
   useEffect(() => {
     let temp = favourites.map((movie) => genreids[movie.genre_ids[0]])
     // console.log(temp)
+    temp = new Set(temp)
     setGenre(["All Genre",...temp])
   },[favourites])
 
@@ -82,7 +87,7 @@ function Favourites() {
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200'>
                     {
-                      favourites.map((movie) => (
+                      filteredMovies.map((movie) => (
                         <tr key={movie.id}>
                           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-center'>
                             <div className='flex items-center'>

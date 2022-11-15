@@ -36,7 +36,7 @@ function Movies() {
 
     useEffect(() => {
         let oldFav = localStorage.getItem("imdb")
-        oldFav = JSON.parse(oldFav)
+        oldFav = JSON.parse(oldFav) || []
         setFavourites([...oldFav])
 
         axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=2905f9ab72e771d70a52c00ee3bbfaa9&page=${pageNumber}`).then((res) => {
