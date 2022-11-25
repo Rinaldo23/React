@@ -1,0 +1,70 @@
+/* Div-1 */
+.login-main-page{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 7rem;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: 22rem;
+    height: 53vh;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 0.2rem;
+}
+
+.insta-img {
+    height: 6vh;
+    width: 10vw;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.login-policy {
+    font-size: 0.8rem;
+    width: 15rem;
+}
+
+.login-policy-span {
+    font-weight: bold;
+}
+
+/* Div-2 */
+.bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: 22rem;
+    height: 8vh;
+    margin-top: 0.7rem;
+    border-radius: 0.2rem;
+}
+
+/* Div-3 */
+.carousel-background {
+    background: url(../../images/Carousel_bg.png);
+    height: 581px;
+    width: 380px;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    /* Resize the background image to cover the entire container */
+    margin-right: 1rem;
+}
