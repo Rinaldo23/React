@@ -1,5 +1,5 @@
 /* Div-1 */
-.login-main-page{
+.login-main-page {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -56,15 +56,20 @@
 }
 
 /* Div-3 */
-.carousel-background {
+.car-bg {
     background: url(../../images/Carousel_bg.png);
     height: 581px;
     width: 380px;
     background-position: center;
-    /* Center the image */
-    background-repeat: no-repeat;
-    /* Do not repeat the image */
     background-size: cover;
-    /* Resize the background image to cover the entire container */
-    margin-right: 1rem;
+    position: relative;
+}
+
+.car {
+    position: absolute;
+    top: 1.4rem;
+    left: 7.35rem;
+    width: 14.7rem;
+    border-radius: 1.7rem;
+    /* background-color: rgb(255, 255, 255); */
 }
