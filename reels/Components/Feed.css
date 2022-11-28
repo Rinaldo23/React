@@ -1,0 +1,93 @@
+/* NavBar */
+.navBar{
+    background-color: white;
+    height: 4rem;
+    display: flex;
+}
+
+.navBar-container{
+    display: flex;
+    justify-content:space-between;
+}
+
+/* Upload */
+.upload-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-btn{
+    width: 15vw;
+    margin-top: 0.5rem;
+}
+
+.linear-loader{
+    width: 15vw;
+    margin-top: 0.15rem;
+}
+
+/* Video */
+.video-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.3rem;
+    /* border: 1px solid rgb(2, 2, 2); */
+}
+
+.video-holder{
+    /* border: 1px solid rgb(184, 24, 24); */
+    height: 85vh;
+    width: 20vw;
+    /* background-color: rgb(237, 234, 39); */
+    border-radius: 1.5rem;
+    margin-bottom: 0.1rem;
+    overflow-y: scroll;   
+    scrollbar-width: 0;
+    position: relative;
+}
+
+.video-holder::-webkit-scrollbar {
+    display: none;
+}
+
+.reel-video{
+    border: 1px solid rgb(184, 24, 24);
+    height: 85vh;
+    width: 20vw;
+    background-color: rgb(82, 228, 111);
+    border-radius: 1.5rem;
+    margin-bottom: 0.1rem;
+}
+
+.video-info{
+    position: absolute;
+    /* border: 1px solid red; */
+    height: 8vh;
+    width: 65%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    bottom: 0.3rem;
+    left: 1.2rem;
+}
+
+.video-name{
+    margin-left: 1rem;
+    font-weight: bold;
+    font-size: large;
+}
+
+.like-info{
+    position: absolute;
+    /* border: 1px solid red; */
+    height: 10vh;
+    /* width: 65%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    bottom: 0.3rem;
+    right: 1.2rem;
+    font-size: large;
+}
