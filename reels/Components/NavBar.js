@@ -23,7 +23,7 @@ function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const { logout } = React.useContext(AuthContext)
+    const { logout, user } = React.useContext(AuthContext)
     const router = useRouter()
 
     const handleOpenNavMenu = (event) => {
@@ -43,8 +43,16 @@ function ResponsiveAppBar() {
 
     const handleLogout = async() => {
         await logout()
-        router.push("/login")
+        // Useffect better then router.push 
     }
+
+    React.useEffect(()=>{
+        if(user){
+          router.push('/')
+        }else{
+            router.push("/login")
+        }
+      },[user])
 
     return (
         <AppBar position="static" className='navBar'>
