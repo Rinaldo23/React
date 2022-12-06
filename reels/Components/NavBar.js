@@ -14,12 +14,17 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Insta from '../images/Insta.png'
 import Image from 'next/image'
+import { AuthContext } from '../Context/auth';
+import { useRouter } from 'next/router';
 
 const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const { logout } = React.useContext(AuthContext)
+    const router = useRouter()
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -35,6 +40,11 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleLogout = async() => {
+        await logout()
+        router.push("/login")
+    }
 
     return (
         <AppBar position="static" className='navBar'>
@@ -55,7 +65,7 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <Image src={Insta} style={{ height: '3.5rem', width: '10rem', marginTop:'0.5rem', padding:'0.2rem'}} />
+                        <Image src={Insta} style={{ height: '3.5rem', width: '10rem', marginTop: '0.5rem', padding: '0.2rem' }} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -80,11 +90,15 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">Profile</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={()=>{
+                                handleLogout()
+                                handleCloseUserMenu()
+                                }}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

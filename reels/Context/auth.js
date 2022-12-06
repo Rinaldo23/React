@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -24,14 +24,19 @@ function AuthWrapper({ children }) {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    function logout(){
+        return signOut(auth)
+    }
+
     const store = {
         login,
-        user
+        user,
+        logout
     }
 
     return (
         <AuthContext.Provider value={store}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }
