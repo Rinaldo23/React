@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -28,10 +28,15 @@ function AuthWrapper({ children }) {
         return signOut(auth)
     }
 
+    function forgetPassword(email){
+        return sendPasswordResetEmail(auth, email)
+    }
+
     const store = {
         login,
         user,
-        logout
+        logout,
+        forgetPassword
     }
 
     return (
