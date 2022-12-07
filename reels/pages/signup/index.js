@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Insta from '../../images/Insta.png'
 import { AuthContext } from '../../Context/auth';
 import { useRouter } from 'next/router';
-import { storage } from '../../firebase';
+import { db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import Link from 'next/link';
+import { doc, setDoc } from 'firebase/firestore';
 
 function signup() {
 
@@ -50,8 +52,18 @@ function signup() {
         () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             console.log('File available at', downloadURL);
+
+            let userObj = {
+              name : name,
+              email : email,
+              uid : user.user.uid,
+              photoURl : downloadURL
+            }
+
+            await setDoc(doc(db, "users", user.user.uid), userObj);
+
           });
         }
       );
@@ -90,7 +102,7 @@ function signup() {
           </Button>
         </div>
         <div className='bottom-container'>
-          Have an account? <span style={{ color: 'blue', marginLeft: '5px' }} >Log in</span>
+          Have an account? <Link href={"/login"}><span style={{ color: 'blue', marginLeft: '5px' }} >Log in</span></Link>
         </div>
       </div>
     </>

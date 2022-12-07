@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/auth';
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 
 function login() {
 
@@ -67,7 +68,7 @@ function login() {
                     </Button>
                 </div>
                 <div className='bottom-container'>
-                    Don't have an account? <span style={{ color: 'blue', marginLeft: '5px' }} >Sign up</span>
+                    Don't have an account? <Link href={"/signup"}><span style={{ color: 'blue', marginLeft: '5px' }} >Sign up</span></Link>
                 </div>
             </div>
         </div>
