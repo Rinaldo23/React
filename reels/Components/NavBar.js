@@ -5,13 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Insta from '../images/Insta.png'
 import Image from 'next/image'
 import { AuthContext } from '../Context/auth';
@@ -19,7 +16,7 @@ import { useRouter } from 'next/router';
 
 const settings = ['Profile', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ userData }) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -41,23 +38,30 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         await logout()
         // Useffect better then router.push 
     }
 
-    React.useEffect(()=>{
-        if(user){
-          router.push('/')
-        }else{
+    React.useEffect(() => {
+        if (user) {
+            router.push('/')
+        } else {
             router.push("/login")
         }
-      },[user])
+    }, [user])
 
     return (
-        <AppBar position="static" className='navBar'>
+        <AppBar position="static" style={{
+            backgroundColor: 'white',
+            height: '4rem',
+            display: 'flex'
+        }}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters className='navBar-container' >
+                <Toolbar disableGutters style={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }}>
                     <Typography
                         variant="h6"
                         noWrap
@@ -79,7 +83,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" src={userData.photoURl} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -101,10 +105,10 @@ function ResponsiveAppBar() {
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center">Profile</Typography>
                             </MenuItem>
-                            <MenuItem onClick={()=>{
+                            <MenuItem onClick={() => {
                                 handleLogout()
                                 handleCloseUserMenu()
-                                }}>
+                            }}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>
                         </Menu>

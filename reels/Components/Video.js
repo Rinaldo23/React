@@ -17,17 +17,6 @@ function Video() {
                     </div>
                 </div>
 
-                <div className='reel-video'>
-                    <div className='video-info'>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                        <p className='video-name'>Paro - Nej</p>
-                    </div>
-                    <div className='like-info'>
-                        <FavoriteIcon fontSize='large' />
-                        <p>10</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     )

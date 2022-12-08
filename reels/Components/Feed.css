@@ -1,10 +1,4 @@
 /* NavBar */
-.navBar{
-    background-color: white;
-    height: 4rem;
-    display: flex;
-}
-
 .navBar-container{
     display: flex;
     justify-content:space-between;
