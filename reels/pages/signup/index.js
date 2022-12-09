@@ -43,7 +43,7 @@ function signup() {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log('Upload is ' + progress + '% done');
-          
+
         },
         (error) => {
           // Handle unsuccessful uploads
@@ -56,10 +56,11 @@ function signup() {
             console.log('File available at', downloadURL);
 
             let userObj = {
-              name : name,
-              email : email,
-              uid : user.user.uid,
-              photoURl : downloadURL
+              name: name,
+              email: email,
+              uid: user.user.uid,
+              photoURL: downloadURL,
+              posts: []
             }
 
             await setDoc(doc(db, "users", user.user.uid), userObj);

@@ -1,15 +1,6 @@
 /* NavBar */
-.navBar-container{
-    display: flex;
-    justify-content:space-between;
-}
 
 /* Upload */
-.upload-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .upload-btn{
     width: 15vw;

@@ -29,7 +29,7 @@ function Feed() {
   return (
     <div>
       <NavBar userData={userData}/>
-      <Upload />
+      <Upload userData={userData}/>
       <Video />
     </div>
   )
